@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/favicon.ico">
+    <title>React</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/17.0.2/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.2/umd/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <style>
+        .tit{
+            color: blue;
+            background-color: cadetblue;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+        const vDom = <h1>Hello React</h1>
+        // ReactDOM.render(vDom,document.getElementById("app"))
+        const data = 'Data Get'
+        let dom2=<h1 style={{background: 'cadetblue'}} className="tit">{data}</h1>
+        ReactDOM.render(dom2,document.getElementById("app"))
+
+        let dom3=(
+            <div>
+                <h1 style={{background: 'cadetblue'}} className="tit">{data}</h1>
+                <h1>Hello React</h1>
+            </div>
+            )
+        ReactDOM.render(dom3,document.getElementById("app"))
+        /*
+         1/虚拟DOM的jsx语法不能用引号
+         2/jsx里面 如果引用js表达式 则需要用{}进行引入
+         3/标签中样式的名称要用className表示
+         4/内联样式要用{{}}
+         5/只能有一个根标签
+         6/标签必须闭合
+         7/标签首字母小写 react认为是html标签 首字母大写是自定义标签
+        */
+        
+        
+    </script>
+</body>
+</html>
