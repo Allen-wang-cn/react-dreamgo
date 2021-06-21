@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/favicon.ico">
+    <title>利用JS创建虚拟DOM</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/17.0.2/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.2/umd/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+</head>
+<body>
+    <div id="test"></div>
+    <script type="text/javascript">
+        // 不使用jsx 直接使用js编写虚拟DOM, jsx运行是需要使用Babel翻译  翻译成js之后运行
+        let vDom = React.createElement("h1",{id:"atguifu"},React.createElement("span",null,"Hello React##"));
+        ReactDOM.render(vDom,document.getElementById("test"));
+    </script>
+</body>
+</html>
