@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/favicon.ico">
+    <title>React</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/17.0.2/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.2/umd/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+        let param=["Anglar","React","Vue"]
+        const vDom = (<div>
+                <h1>前端框架</h1>
+                {demo(param)}
+                {param.map((item,index)=>{
+                    return <li key={index}>{item}</li>
+                })}
+                {//param.map((item,index)=><li key={index}>{item}</li>) //简写方式
+                }
+            </div>)
+        ReactDOM.render(vDom,document.getElementById("app"))
+        function demo(a){
+            let at = []
+            a.forEach(function(item,index){
+                at.push(<li key={index}>{item}</li>)
+            })
+            return at
+        }
+        /*
+          jsx中{}可以写js表达式  但是不能写js语句
+          什么是js表达式：能够获取一个值的叫表达式
+          1 、a//一个变量
+          2、 a+b
+          3、demo(a) //函数调用
+          4、arr.map
+          5、function test() //函数表达式
+          js语句
+          1、if() 判断语句
+          2、for()循环语句
+          3、switch() 语句
+
+          //数组的操作方法
+          let arr = []
+          arr.map(function(item,index){}) //返回新数组
+          arr.forEach(function(item,index){}) //没有返回值
+        */
+
+    </script>
+    
+</body>
+</html>
