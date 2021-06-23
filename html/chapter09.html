@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React</title>
+    <link rel="icon" href="../images/favicon.ico">
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/17.0.2/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.2/umd/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+        class Demo extends React.Component{
+            render(){
+                return (
+                    <div>
+                        <input type="text" ref="input1"/>
+                        <input type="button" onClick={this.show} value="点我提示左边"/>
+                        <input type="text" ref="input2" onBlur={this.show2}/>
+                    </div>
+                )
+            }
+
+            show = ()=>{
+                const {input1}=this.refs
+                alert(input1.value);
+            }
+            show2 = ()=>{
+                const {input2}=this.refs
+                alert(input2.value);
+            }
+        }
+        
+        ReactDOM.render(<Demo/>,document.getElementById("app"))
+    </script>
+
+</body>
+</html>

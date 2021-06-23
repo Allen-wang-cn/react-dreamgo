@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="../images/favicon.ico">
+        <title>利用JS创建虚拟DOM</title>
+        <script src="https://cdn.bootcdn.net/ajax/libs/react/17.0.2/umd/react.development.js"></script>
+        <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.2/umd/react-dom.development.js"></script>
+        <script src="../js/babel.min.js"></script>
+    </head>
+<body>
+    <div id="app"></div>
+    <script type="text/javascript">
+
+    function demo(){
+        console.log(this)
+    }
+    demo()//this 是window  直接调用
+    demo.call(1)//this 是1  触发调用
+    demo.apply(2)//this 是2 触发调用
+    demo.bind(3)//this 是3 返回的是个函数表达式
+    const x=demo.bind(3) //this 是3 不直接触发调用
+    x()//被调用
+
+    class Demo{
+        constructor(name,age){
+            this.name=name
+            this.age=age
+            //把原型上的speak方法绑定到实例的speak方法上
+            this.speak=this.speak.bind(this)
+        }
+
+        // 函数 并不是直接在实例对象上面 是实力对象原型上面
+        speak(){
+            console.log(this)
+        }
+    }
+
+    let d1 = new Demo("张三",100)
+
+    // 解构赋值 解构赋值只能对2中类型处理 对象和数组
+    let obj = {a:1,b:2,c:3}
+    const {c} = obj// c是3
+
+    let arr =[1,2,3]
+    const [,,c]=arr// c是3
+
+    let obj = {a:1,b:2,c:{x:2,y:3}}
+    // 连续的解续赋值
+    const{c:{y}} = obj
+    // 这个等价于
+    const y = obj.c.y
+
+    // 取值过程
+    // 首先对obj解续赋值取c const{c}=obj
+    // 在对c进行解续赋值const{y}=c
+    // 简写 const{c:{y}}=obj
+    // 连续的解续赋值+重命名
+    const{c:{y:value}} = obj
+
+    </script>
+</body>
+</html>
