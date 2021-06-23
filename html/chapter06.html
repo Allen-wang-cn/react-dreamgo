@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React</title>
+    <link rel="icon" href="../images/favicon.ico">
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/17.0.2/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.2/umd/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+    class Demo extends React.Component{
+        constructor(props){
+            super(props)
+            this.state = {isHot:true}
+            // 看懂这句话 主要要弄懂 this的指向 bind的含义作用 show2所处的位置
+            this.show2 = this.show2.bind(this)
+        }
+        render(){
+            /*
+              const {dispatch} = this.props;
+              这段代码你可以认为是这样：
+              const dispatch = this.props.dispatch;
+              那样写是 ES6 的简写形式。
+            */
+            const {isHot} = this.state//解构赋值
+            // return <h2 onClick={show}>今天天气很{isHot?'炎热':'凉爽'}</h2>
+            return <h2 onClick={this.show2}>今天天气很{isHot?'炎热':'凉爽'}</h2>
+        }
+        show2(){
+            // 1获取isHot值 2 取反  3 赋值
+            let isHot = this.state.isHot
+            this.setState({isHot:!isHot})
+            console.log(this)
+        }
+    }
+    ReactDOM.render(<Demo/>,document.getElementById('app'))
+    /*
+      组件实例的三大核心属性 
+      1/ state={}
+      2/ props={}
+      3/ refs=null
+    */
+
+    // React绑定事件,必须用驼峰形式,事件后面不能有() 否则就会立即执行 不会等到事件触发
+    // ,html原生的式全部小写 而且在事件的后面有()
+    function show(){
+        alert(1)
+    }
+    </script>
+</body>
+</html>

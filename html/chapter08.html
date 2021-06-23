@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React</title>
+    <link rel="icon" href="../images/favicon.ico">
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/17.0.2/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.2/umd/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+    class Demo extends React.Component{
+        state =  {isHot:true}
+        show = ()=>{ // 这儿必须使用箭头函数 因为箭头函数式匿名函数 this默认到函数外找作用范围  如果使用function(){} 那么内部的this指向式undefined(由于babel的干扰使用了 严格模式)
+            console.log(this)
+            let isHot = this.state.isHot
+            this.setState({isHot:!isHot})
+        }
+        render(){
+            const {isHot} = this.state//解构赋值
+            return <h2 onClick={this.show}>今天天气很{isHot?'炎热':'凉爽'}</h2>
+        }
+    }
+    ReactDOM.render(<Demo/>,document.getElementById('app'))
+
+    /* 
+      js展开语法 ...
+      ...语法可以用来 打包或者拆包
+      let arr = [1,2,3]
+      如果用展开语法  ...arr 返回1,2,3  //拆包
+
+      function demo(...param){//参数打包
+
+      }
+
+      demo(1,2,3)//
+
+      克隆
+      let arr2=[...arr] //克隆一个跟arr值一样的数组
+      let arr3=[0,...arr,4,5]// 装配数组
+
+    */
+    let arr = [1,2,3]
+    console.log(...arr) //1 2 3
+    let arr3=[0,...arr,4,5]
+    console.log(...arr3) // 0 1 2 3 4 5
+    </script>
+</body>
+</html>

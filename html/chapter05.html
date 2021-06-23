@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React</title>
+    <link rel="icon" href="../images/favicon.ico">
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/17.0.2/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.2/umd/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+    /*
+      1/使用函数定义组件
+      2/使用类定义组件
+    */
+    // 使用函数定义组件
+    // 1/定义一个组件
+    function Demo(){
+        console.log(this)// this正常应该是window 但是此处是undefined 是因为babel开启了严格模式 造成this丢失了调用者
+        return <h2>我是函数定义的组件 适用于简单组件</h2>
+    }
+    // 2/渲染组件到页面
+    // ReactDOM.render(<Demo/>,document.getElementById('app'))
+    /*
+      执行顺序
+      1/react解析组件标签
+      2/直接调用函数
+
+      类的复习
+
+    */
+    class Person{
+        // 构造方法
+        constructor(name,age){
+            // 这里的this是实例对象
+            this.name=name
+            this.age=age
+        }
+        // speak 是再Person的原型方法上 是所有的实例公用
+        speak(){
+            console.log("balabala")
+            console.log(`我叫${this.name} 今年 ${this.age}岁`)
+        }
+
+    }
+    const p1 = new Person("老曹",23)
+    p1.speak()
+    // 类的继承
+    class Student extends Person{
+        //如果有继承 且有自己的构造方法  那么必须要用super调用父类的构造方法
+        constructor(name,age,grade){
+            super(name,age)//super 必须在this之前调用  但是可以有非this的语句
+            // this.name=name
+            // this.age=age
+            this.grade=grade
+        }
+        speak(){
+            console.log(`我叫${this.name} 今年 ${this.age}岁 我读${this.grade}了`)
+        }
+        study(){
+            console.log("我再很努力的学习!!")
+        }
+    }
+    const s1 = new Student("小旦",3,"小班");
+    s1.speak()
+    s1.study()
+    // 类式组件的定义 如果写类式组件 必须继承React.Conponent
+    class DemoClass extends React.Component{
+        
+        render(){
+            return <h2>这是一个类组件 可以用于复杂组件的定义</h2>
+        }
+    }
+    ReactDOM.render(<DemoClass/>,document.getElementById('app'))
+    /*
+      调用过程 
+      1/React解析组件标签 寻找到DemoClass的定义的位置
+      2/React创建一个DemoClass类的实例对象----d
+      3/React调用实例对象的render方法
+    */
+    </script>
+</body>
+</html>
