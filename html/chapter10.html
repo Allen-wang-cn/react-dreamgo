@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React</title>
+    <link rel="icon" href="../images/favicon.ico">
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/17.0.2/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.2/umd/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+        class Life extends React.Component{
+            // 构造器有且只有调用一次
+
+            state={opacity:1}
+            // 组件挂载 之前调用 , 只调用一次
+            componentWillMount(){
+                console.log("componentWillMount")
+            }
+
+            //组件挂载 调用n+1次 每state变动一次 就会调用一次
+            render(){
+                let opacity = this.state.opacity
+                return (
+                    <div>
+                        <h1 style={{opacity}}>对生活失望了 怎么办?</h1>
+                        <button onClick={this.death}>不活了</button>    
+                    </div>
+                )
+            }
+
+            // 组件挂载之后调用, 只调用一次
+            componentDidMount(){
+                console.log("componentDidMount")
+                this.timer = setInterval(()=>{
+                    let {opacity} = this.state
+                    opacity = opacity - 0.1
+                    if(opacity<=0)opacity = 1
+                    this.setState({opacity:opacity})
+                },200);
+            }
+
+            death = ()=>{
+                ReactDOM.unmountComponentAtNode(document.getElementById('app'))
+            }
+
+            // 组件卸载之前
+            componentWillUnmount(){
+                clearInterval(this.timer)
+            }
+
+            // 组件生命周期函数 componentWillMount/render/componentDidMount/componentWillUnmount
+
+            // 调用setState时 React 会
+            // 1/调用 shouldComponentUpdate() 这个函数必须返回一个bool值
+            // 2/当第1步返回为 true时 执行componentWillMount() 挂载之前执行的过程
+            // 3/调用render挂载
+            // 4/componentDidUpdate() 挂载之后执行
+
+            // forceUpdate() 调用这个方法之后 强行更新 它和setState同级 属于实例对象方法
+            // 1/不会再用shouldComponentUpdate判断
+            // 2/调用componentWillUpdate
+            // 3/调用render
+            // 4/调用componentDidUpdate()
+
+        }
+        ReactDOM.render(<Life/>,document.getElementById('app'))
+    </script>
+
+</body>
+</html>

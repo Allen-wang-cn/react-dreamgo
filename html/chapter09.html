@@ -14,12 +14,28 @@
     <div id="app"></div>
     <script type="text/babel">
         class Demo extends React.Component{
+            container = React.createRef()
+            container2 = React.createRef()
             render(){
                 return (
                     <div>
+                        {/*字符串的ref写法*/}
                         <input type="text" ref="input1"/>
                         <input type="button" onClick={this.show} value="点我提示左边"/>
                         <input type="text" ref="input2" onBlur={this.show2}/>
+                        <br/>
+
+                        {/*回调函数ref写法*/}
+                        <input type="text" ref={(n)=>{this.inputC1 = n}}/>{/* 箭头函数的this是指向外面的,外面的this是执行实例对象,所以回调就相当于在实例上新增一个属性 保存ref所在的node节点
+                        简写形式 <input type="text" ref={n=>this.inputC1=n}/> */}
+                        <input type="button" onClick={this.showCall} value="点我提示左边"/>
+                        <input type="text" ref={(n)=>{this.inputC2 = n}} onBlur={this.show2Call}/>
+                        <br/>
+
+                        {/*用createRef ref写法*/}
+                        <input type="text" ref={this.container}/>
+                        <input type="button" onClick={this.showRef} value="点我提示左边"/>
+                        <input type="text" ref={this.container2} onBlur={this.show2Ref}/>
                     </div>
                 )
             }
@@ -31,6 +47,24 @@
             show2 = ()=>{
                 const {input2}=this.refs
                 alert(input2.value);
+            }
+
+            showCall = ()=>{
+                console.log(this.inputC1)
+                alert(this.inputC1.value);
+            }
+            show2Call = ()=>{
+                console.log(this.inputC2)
+                alert(this.inputC2.value);
+            }
+
+            showRef = ()=>{
+                console.log(this.container.current)
+                alert(this.container.current.value);
+            }
+            show2Ref = ()=>{
+                console.log(this.container.current2)
+                alert(this.container.current2.value);
             }
         }
         
