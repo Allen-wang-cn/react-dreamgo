@@ -34,6 +34,9 @@
             }
 
             // 组件挂载之后调用, 只调用一次
+            /* 
+               用途:定时器开启,ajax请求,消息订阅
+             */
             componentDidMount(){
                 console.log("componentDidMount")
                 this.timer = setInterval(()=>{
@@ -49,6 +52,9 @@
             }
 
             // 组件卸载之前
+            /* 
+               用途:主要做一些收尾的工作  关闭定时器,ajax请求,取消订阅消息
+             */
             componentWillUnmount(){
                 clearInterval(this.timer)
             }
@@ -66,6 +72,8 @@
             // 2/调用componentWillUpdate
             // 3/调用render
             // 4/调用componentDidUpdate()
+
+
 
         }
         ReactDOM.render(<Life/>,document.getElementById('app'))
