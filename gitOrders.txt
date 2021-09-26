@@ -1,0 +1,34 @@
+git init
+git add [filename] //提交到暂存区
+git add .
+git status
+git commit -m 'discribs' //生成版本号
+git log
+git log --graph //以图形列表的形式展示
+git reflog
+git version
+git config -l
+git config --global user.name 'username'
+git config --global user.email 'email'
+git checkout [filename] //将文件 从编辑/修改(未提交到暂存区) 状态变成未修改状态
+git reset HEAD [filename]//将文件从暂存区 转为未暂存状态 即 执行 git add 命令之前的状态  这时候原先的修改还是存在的 
+git reset --soft [version no.] //将文件回滚到 指定版本号的暂存状态 即 add之后 commit之前
+git reset --mix [version no.] //将文件回滚到 指定版本号的未暂存状态 即 修改之后  add之前
+git reset --hard [version no.] //将文件回滚到 指定版本号的未暂存状态 即 修改之前 就是指定版本的所有东西  没有任何改动
+git branch //查看当前分支
+git branch [branchname] //创建新的分支 branchname
+git checkout [branchname] //切换到分支 branchname
+git merge [branchname] //合并分支 branchname
+git branch -d [branchname] // 删除分支
+git remote add origin [giturl]  //给 giturl起个别名叫 origin 以后可以直接用origin代替giturl
+git push -u origin master //把master分支推送到git仓库上
+git push -u origin [branchname] //把branchname分支推送到仓库里
+git clone [giturl] //从git仓库里面下载到本地  下载到本地之后也会带着branch
+git pull origin [branchname] //从仓库拉取最新的 branchname分支的代码  origin 远程仓库地址的别名 branchname分支名称  git clone 只是在第一次拉取的时候使用
+git fetch origin [branchname] //从远程仓库拉取到本地的 版本区
+git merge origin/[branchname] //合并远程仓库拉取的版本
+
+git pull origin [branchname] = git fetch origin [branchname] + git merge origin/[branchname] 
+git rebase -i HEAD~3 // 版本合并 从当前版本 向下数3个 合并在一起 生成一个版本 一般用于分支多次提交 但是只需最后一次完结后向master merge的时候 如果master 只需要最后一个版本 不需要过程版本 就可以用这个方法
+git tag -a v1 -m '版本名称'
+git push origin --tags
