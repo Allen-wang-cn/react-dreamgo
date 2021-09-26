@@ -1,2 +1,14 @@
 [dev]
 database:mysql
+
+git config --local user.name ""
+git config --local user.email ""
+这2个设置  是在.git文件里面的 config配置文件里面配置的 局部的只在当前仓库有效
+
+[user]
+	email = whl2009_king@163.com
+	name = Allen-wang-cn
+	
+git config --global user.name ""
+git config --global user.email ""
+这2个设置  是在用户文件夹里面的 .gitconfig文件里面的  全局的
